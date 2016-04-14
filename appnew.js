@@ -47,6 +47,31 @@ app.get('/webhook/', function (req, res) {
 	res.send('Error, wrong validation_token');
 });
 
+/**THIS NEEDS TO GO IN MODELS OR CONTROLLERS I CANT REMEMBER WHICH**/
+var token = "EAACjBDR8ZBqkBAAFRoqSYFkj4iZAYC6mOKhfH9MdJdY95in3JZB3DD1CAEMlMvJJDEKibUbZAVFKKoKfl1wzRK58oyVpQW4esPUNHySmI4bGsU3WIg7Bb9sfWSNLN9p2EZBySkfDrK2aaOLSx54R7Kn8MzpZCzfPIMFZC4Qs4cBOAZDZD";
+
+function sendTextMessage(sender, text) {
+  messageData = {
+    text:text
+  }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    }
+  });
+}
+
+//handle messages sent to page
 app.post('/webhook/', function (req, res) {
   messaging_events = req.body.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {
@@ -55,10 +80,13 @@ app.post('/webhook/', function (req, res) {
     if (event.message && event.message.text) {
       text = event.message.text;
       // Handle a text message from this sender
+       sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
   }
   res.sendStatus(200);
 });
+
+
 
 var server = app.listen(process.env.PORT || 8080, function() {
 	var host = server.address().address;
