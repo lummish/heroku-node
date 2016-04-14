@@ -41,7 +41,7 @@ app.post('/upload', upload.single('displayImage'), function(req, res, next) {
 });
 
 app.get('/webhook/', function (req, res) {
-	if (req.query['hub.verify_token'] === '<validation_token') {
+	if (req.query['hub.verify_token'] === 'verify_token_test') {
 		res.send(req.query['hub.challenge']);
 	}
 	res.send('Error, wrong validation_token');
