@@ -1,0 +1,34 @@
+{
+  "name": "receipt-read-test",
+  "version": "0.0.0",
+  "main": "appnew.js",
+  "scripts": {
+    "start": "node appnew.js"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "filereader": "^0.10.3",
+    "gcloud": "^0.29.0",
+    "hjs": "~0.0.6",
+    "http": "0.0.0",
+    "less-middleware": "1.0.x",
+    "morgan": "~1.6.1",
+    "multer": "^1.1.0",
+    "serve-favicon": "~2.3.0"
+  },
+  "engines": {
+    "node": "4.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.heroku.com/agile-tor-17851.git"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
