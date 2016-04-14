@@ -4,6 +4,7 @@ var http = require('http'),
 	ejs = require('ejs'),
 	hjs = require('hjs'),
 	path = require('path'),
+	request = require('request'),
 	FileReader = require('filereader'),
 	gcloud = require('gcloud')({
 		keyFilename: 'Receipt Read Test-674e7b00346d.json',
