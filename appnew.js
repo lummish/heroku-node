@@ -92,7 +92,7 @@ app.post('/webhook/', function (req, res) {
     //		//save file
     //		gcs_file_name = '/bucket_name/';
     //	}
-    }
+    //}
   }
   res.sendStatus(200);
 });
