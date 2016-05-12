@@ -47,7 +47,7 @@ var download = function(uri, filename, callback) {
 //post image data and process using cloudvision
 app.post('/upload', upload.single('displayImage'), function(req, res, next) {
   
-  download()
+ 
 
   var bucket = gcs.bucket('test-bucket');
   var reader = new FileReader();
