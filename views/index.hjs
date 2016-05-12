@@ -6,10 +6,12 @@
   </head>
   <body>
     <h1>{{ title }}</h1>
-    <p>Welcome to Receipt Reader</p>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-    	<input type="file" name="displayImage">
-      <input type="submit" id="submit_button">
-    </form>
+    <div id="img_submit">
+      <p>Welcome to Receipt Reader</p>
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+      	<input type="file" name="displayImage">
+        <input type="submit" id="submit_button">
+      </form>
+    </div>
   </body>
 </html>
