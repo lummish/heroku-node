@@ -46,7 +46,7 @@ var download = function(uri, filename, callback) {
 }
 
 
-function convertImgToDataURLviaFileReader(url, callback) {
+var convertImgToDataURLviaFileReader = function (url, callback) {
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
   xhr.onload = function() {
