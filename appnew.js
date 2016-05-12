@@ -114,9 +114,9 @@ app.post('/webhook/', function (req, res) {
       // Handle a text message from this sender
       sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
-    /*
-    console.log(event.message.attachments);
+  
     if (event.message && //event.hasOwnProperty('attachments') &&
+      typeof(event.message.attachments) !== 'undefined' &&
       event.message.attachments.length == 1 &&
     	event.message.attachments[0].type == "image") {
     	var imgUrl = event.message.attachments[0].payload.url;
@@ -140,7 +140,6 @@ app.post('/webhook/', function (req, res) {
       
     	//}
     }
-    */
   }
   res.sendStatus(200);
 });
