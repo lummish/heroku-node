@@ -7,7 +7,7 @@ var http = require('http'),
 	request = require('request'),
 	FileReader = require('filereader'),
   fs = require('fs'),
-  xhr = require('xmlhttprequest'),
+  XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
 	gcloud = require('gcloud')({
 		keyFilename: 'Receipt Read Test-674e7b00346d.json',
 		projectId: 'receipt-read-test'
@@ -47,7 +47,7 @@ var download = function(uri, filename, callback) {
 
 
 function convertImgToDataURLviaFileReader(url, callback) {
-  //var xhr = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
   xhr.onload = function() {
     FileReader.onloadend = function() {
