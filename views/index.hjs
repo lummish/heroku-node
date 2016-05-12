@@ -10,7 +10,7 @@
       <h1>Welcome to Receipt Reader</h1>
       <form action="/upload" method="POST" enctype="multipart/form-data">
       	<input type="file" class="button" name="displayImage">
-        <input type="submit" class="button" text="SUBMIT">
+        <input type="submit" class="button" text="SUBMIT">SUBMIT</input>
       </form>
     </div>
   </body>
