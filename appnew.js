@@ -123,11 +123,11 @@ app.post('/webhook/', function (req, res) {
         //may need to get file extension
       var image_name = 'test-img.png';
       var filename = image_name; //will need to update path
-    	download(imgUrl, filename, function() { //need file extension
-        console.log("Downloaded.");
-        convertImgToDataURLviaFileReader(imgUrl, function(base64Img) {
+    	convertImgToDataURLviaFileReader(imgUrl, function(base64Img) {
           console.log(base64Img);
-        });
+      });
+      download(imgUrl, filename, function() { //need file extension
+        console.log("Downloaded.");
         //var bucket = gcs.bucket('receipt-read-bucket');
         //var localReadStream = fs.createReadStream(filename);
         //var remoteWriteStream = bucket.file(image_name).createWriteStream();
