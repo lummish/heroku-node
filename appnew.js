@@ -44,7 +44,7 @@ var download = function(uri, filename, callback) {
   });
 }
 
-/*
+
 function convertImgToDataURLviaFileReader(url, callback) {
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
@@ -57,7 +57,7 @@ function convertImgToDataURLviaFileReader(url, callback) {
   xhr.open('GET', url);
   xhr.send();
 };
-*/
+
 
 //post image data and process using cloudvision
 app.post('/upload', upload.single('displayImage'), function(req, res, next) {
@@ -127,9 +127,9 @@ app.post('/webhook/', function (req, res) {
         //may need to get file extension
       var image_name = 'test-img.png';
       var filename = image_name; //will need to update path
-    	//convertImgToDataURLviaFileReader(imgUrl, function(base64Img) {
-      //    console.log(base64Img);
-      //});
+    	convertImgToDataURLviaFileReader(imgUrl, function(base64Img) {
+          console.log(base64Img);
+      });
       download(imgUrl, filename, function() { //need file extension
         console.log("Downloaded.");
         //var bucket = gcs.bucket('receipt-read-bucket');
