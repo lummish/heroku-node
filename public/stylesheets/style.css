@@ -14,7 +14,7 @@ a {
 	color: white;
 }
 
-#submit_button {
+.button {
 	border-radius: 3px;
 	font: 14px "Lucida Grande",Helvetica,Arial,sans-serif
 	box-shadow: 2px 2px 2px;

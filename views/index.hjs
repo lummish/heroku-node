@@ -9,8 +9,8 @@
     <div id="img_submit">
       <h1>Welcome to Receipt Reader</h1>
       <form action="/upload" method="POST" enctype="multipart/form-data">
-      	<input type="file" name="displayImage">
-        <input type="submit" id="submit_button">
+      	<input type="file" class="button" name="displayImage">
+        <input type="submit" class="button" text="SUBMIT">
       </form>
     </div>
   </body>
