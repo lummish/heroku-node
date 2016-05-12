@@ -6,6 +6,7 @@ var http = require('http'),
 	path = require('path'),
 	request = require('request'),
 	FileReader = require('filereader'),
+  fs = require('fs'),
 	gcloud = require('gcloud')({
 		keyFilename: 'Receipt Read Test-674e7b00346d.json',
 		projectId: 'receipt-read-test'
@@ -16,8 +17,8 @@ var multer  = require('multer');
 var upload = multer({ dest: 'uploads/' });
 
 var vision = gcloud.vision();
+var gcs = gcloud.storage();
 var app = express();
-
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
@@ -33,9 +34,23 @@ app.get('/', function(req, res) {
 	res.render('index');
 });
 
+//need to put into separate model
+var download = function(uri, filename, callback) {
+  request.head(uri, function(err, res, body) {
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
+
 //post image data and process using cloudvision
 app.post('/upload', upload.single('displayImage'), function(req, res, next) {
-	var reader = new FileReader();
+  
+  download()
+
+  var bucket = gcs.bucket('test-bucket');
+  var reader = new FileReader();
 	vision.detectText(reader.readAsDataURL(req.file.path), function(err, text, apiResponse) {
   		console.log(text);
 	});	
@@ -84,15 +99,24 @@ app.post('/webhook/', function (req, res) {
       console.log(text);
       sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
-    //if (event.message && event.attachments.length == 1 &&
-    //	event.attachments[0].type == "image") {
-    //	imgUrl = event.attachments[0].payload.url
-    //	//result = urlfetch.fetch(url)
-    //	if (result.status_code == 200) {
-    //		//save file
-    //		gcs_file_name = '/bucket_name/';
-    //	}
-    //}
+    if (event.message && event.attachments.length == 1 &&
+    	event.attachments[0].type == "image") {
+    	imgUrl = event.attachments[0].payload.url
+    	result = urlfetch.fetch(imgUrl)
+    	if (result.status_code == 200) {
+    		//save file
+        //may need to get file extension
+        var image_name = 'test-img'
+        var filename = '/uploads/' + image_name
+    		dowload(imgUrl, filename, function() { //need file extension
+          var bucket = gcs.bucket('receipt-reader')
+          var localReadStream = fs.createReadStream(filename);
+          var remoteWriteStream = bucket.file(image_name).createWriteStream();
+          localReadStream.pipe(remoteWriteStream); //not sure what this does
+        }
+        console.log("successfully saved image")
+    	}
+    }
   }
   res.sendStatus(200);
 });
