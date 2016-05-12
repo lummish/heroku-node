@@ -98,10 +98,10 @@ app.post('/webhook/', function (req, res) {
       // Handle a text message from this sender
       sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
-    if (event.message && event.hasOwnProperty('attachments') &&
-      event.attachments.length == 1 &&
-    	event.attachments[0].type == "image") {
-    	imgUrl = event.attachments[0].payload.url;
+    if (event.message && //event.hasOwnProperty('attachments') &&
+      event.message.attachments.length == 1 &&
+    	event.message.attachments[0].type == "image") {
+    	imgUrl = event.message.attachments[0].payload.url;
       console.log(imgUrl);
     	result = urlfetch.fetch(imgUrl);
     	if (result.status_code == 200) {
