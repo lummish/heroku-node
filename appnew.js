@@ -108,7 +108,7 @@ app.post('/webhook/', function (req, res) {
     		//save file
         //may need to get file extension
         var image_name = 'test-img.png';
-        var filename = '/uploads/' + image_name;
+        var filename = 'uploads/' + image_name;
     		download(imgUrl, filename, function() { //need file extension
           var bucket = gcs.bucket('receipt-reader');
           var localReadStream = fs.createReadStream(filename);
