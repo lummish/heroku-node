@@ -49,12 +49,13 @@ var download = function(uri, filename, callback) {
 var convertImgToDataURLviaFileReader = function (url, callback) {
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
-  xhr.onload = function() {
+  //xhr.onload = function() {
+  xhr.onreadystatechange = function() { 
     var reader = new FileReader();
     reader.onloadend = function() {
       callback(reader.result);
     }
-    console.log(xhr.response);
+
     reader.readAsDataURL(xhr.response);
   };
   xhr.open('GET', url);
