@@ -96,13 +96,13 @@ app.post('/webhook/', function (req, res) {
     if (event.message && event.message.text) {
       text = event.message.text;
       // Handle a text message from this sender
-      console.log(text);
       sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
     if (event.message && event.hasOwnProperty('attachments') &&
       event.attachments.length == 1 &&
     	event.attachments[0].type == "image") {
     	imgUrl = event.attachments[0].payload.url;
+      console.log(imgUrl);
     	result = urlfetch.fetch(imgUrl);
     	if (result.status_code == 200) {
     		//save file
