@@ -99,7 +99,8 @@ app.post('/webhook/', function (req, res) {
       console.log(text);
       sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
-    if (event.message && event.attachments.length == 1 &&
+    if (event.message && event.hasOwnProperty('attachments') &&
+      event.attachments.length == 1 &&
     	event.attachments[0].type == "image") {
     	imgUrl = event.attachments[0].payload.url;
     	result = urlfetch.fetch(imgUrl);
