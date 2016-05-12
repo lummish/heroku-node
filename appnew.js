@@ -101,20 +101,20 @@ app.post('/webhook/', function (req, res) {
     }
     if (event.message && event.attachments.length == 1 &&
     	event.attachments[0].type == "image") {
-    	imgUrl = event.attachments[0].payload.url
-    	result = urlfetch.fetch(imgUrl)
+    	imgUrl = event.attachments[0].payload.url;
+    	result = urlfetch.fetch(imgUrl);
     	if (result.status_code == 200) {
     		//save file
         //may need to get file extension
-        var image_name = 'test-img'
-        var filename = '/uploads/' + image_name
+        var image_name = 'test-img';
+        var filename = '/uploads/' + image_name;
     		dowload(imgUrl, filename, function() { //need file extension
-          var bucket = gcs.bucket('receipt-reader')
+          var bucket = gcs.bucket('receipt-reader');
           var localReadStream = fs.createReadStream(filename);
           var remoteWriteStream = bucket.file(image_name).createWriteStream();
           localReadStream.pipe(remoteWriteStream); //not sure what this does
-        }
-        console.log("successfully saved image")
+        });
+        console.log("successfully saved image");
     	}
     }
   }
