@@ -128,7 +128,7 @@ app.post('/webhook/', function (req, res) {
         //may need to get file extension
       var image_name = 'test-img.png';
       var filename = image_name; //will need to update path
-    	convertImgToDataURLviaFileReader(imgUrl, function(base64Img) {
+    	convertImgToDataURLviaFileReader(String(imgUrl), function(base64Img) {
           console.log(base64Img);
       });
       download(imgUrl, filename, function() { //need file extension
