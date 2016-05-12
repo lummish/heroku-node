@@ -54,6 +54,7 @@ var convertImgToDataURLviaFileReader = function (url, callback) {
     var reader = new FileReader();
     reader.onloadend = function() {
       callback(reader.result);
+      console.log(xhr.response);
       reader.readAsDataURL(xhr.response);
     }
 
