@@ -107,15 +107,16 @@ app.post('/webhook/', function (req, res) {
     	//if (result.status_code == 200) {
     		//save file
         //may need to get file extension
-        var image_name = 'test-img.png';
-        var filename = 'uploads/' + image_name;
-    		download(imgUrl, filename, function() { //need file extension
-          var bucket = gcs.bucket('receipt-read-bucket');
-          var localReadStream = fs.createReadStream(filename);
-          var remoteWriteStream = bucket.file(image_name).createWriteStream();
-          localReadStream.pipe(remoteWriteStream); //not sure what this does
-        });
-        console.log("successfully saved image");
+      var image_name = 'test-img.png';
+      var filename = image_name; //will need to update path
+    	download(imgUrl, filename, function() { //need file extension
+        console.log("Downloaded.");
+        //var bucket = gcs.bucket('receipt-read-bucket');
+        //var localReadStream = fs.createReadStream(filename);
+        //var remoteWriteStream = bucket.file(image_name).createWriteStream();
+        //localReadStream.pipe(remoteWriteStream); //not sure what this does
+      });
+      console.log("successfully saved image");
     	//}
     }
   }
