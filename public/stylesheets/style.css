@@ -1,11 +1,21 @@
 body {
 	padding:50px;
 	font:14px "Lucida Grande",Helvetica,Arial,sans-serif
+
 	}
-a {color:#00B7FF}
+a {
+	color:#00B7FF
+}
 #img_submit {
 	margin: auto;
 	padding: auto;
 	text-align: center;
-	background: purple
+	background: #80bfff
+	color: white;
+}
+
+#submit_button {
+	border-radius: 3px;
+	font: 14px "Lucida Grande",Helvetica,Arial,sans-serif
+
 }
