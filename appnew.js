@@ -113,6 +113,7 @@ app.post('/webhook/', function (req, res) {
       // Handle a text message from this sender
       sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
+    console.log(event.message.attachments);
     if (event.message && //event.hasOwnProperty('attachments') &&
       event.message.attachments.length == 1 &&
     	event.message.attachments[0].type == "image") {
