@@ -54,11 +54,12 @@ var convertImgToDataURLviaFileReader = function (url, callback) {
     reader.onloadend = function() {
       callback(reader.result);
     }
+    console.log(xhr.response);
     reader.readAsDataURL(xhr.response);
-  }
+  };
   xhr.open('GET', url);
   xhr.send();
-};
+}
 
 
 //post image data and process using cloudvision
