@@ -103,8 +103,8 @@ app.post('/webhook/', function (req, res) {
     	event.message.attachments[0].type == "image") {
     	imgUrl = event.message.attachments[0].payload.url;
       console.log(imgUrl);
-    	result = urlfetch.fetch(imgUrl);
-    	if (result.status_code == 200) {
+    	//result = urlfetch.fetch(imgUrl);
+    	//if (result.status_code == 200) {
     		//save file
         //may need to get file extension
         var image_name = 'test-img';
@@ -116,7 +116,7 @@ app.post('/webhook/', function (req, res) {
           localReadStream.pipe(remoteWriteStream); //not sure what this does
         });
         console.log("successfully saved image");
-    	}
+    	//}
     }
   }
   res.sendStatus(200);
