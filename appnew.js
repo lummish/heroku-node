@@ -50,7 +50,7 @@ var convertImgToDataURLviaFileReader = function (url, callback) {
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
   //xhr.onload = function() {
-  xhr.onreadystatechange = function() { 
+  xhr.onload = function() { 
     var reader = new FileReader();
     reader.onloadend = function() {
       callback(reader.result);
