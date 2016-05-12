@@ -101,7 +101,7 @@ app.post('/webhook/', function (req, res) {
     if (event.message && //event.hasOwnProperty('attachments') &&
       event.message.attachments.length == 1 &&
     	event.message.attachments[0].type == "image") {
-    	imgUrl = event.message.attachments[0].payload.url;
+    	var imgUrl = event.message.attachments[0].payload.url;
       console.log(imgUrl);
     	//result = urlfetch.fetch(imgUrl);
     	//if (result.status_code == 200) {
