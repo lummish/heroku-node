@@ -50,6 +50,9 @@ var download = function(uri, filename, callback) {
 var processImageFromB64 = function(b64) {
   console.log("Supposed url" + b64);
   vision.detectText(b64, function(err, text) {
+    if (err) {
+      console.log(err);
+    }
     console.log(text);
   });
 }
