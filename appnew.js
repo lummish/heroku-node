@@ -154,9 +154,9 @@ app.post('/webhook/', function (req, res) {
         if (err) {
           console.log(err);
         }
-        console.log(image);
+        console.log(img);
       });
-      
+
       download(imgUrl, filename, function() { //need file extension
         console.log("Downloaded.");
         //var bucket = gcs.bucket('receipt-read-bucket');
