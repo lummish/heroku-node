@@ -72,12 +72,13 @@ var processImageFromB64 = function(b64) {
       }]
     }
   }, function(err, res, body) {
-    if (error) {
-      console.log('Error processing image: ', error);
-    } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
+    if (err) {
+      console.log('Error processing image: ', err);
+    } else if (res.body.error) {
+      console.log('Error: ', res.body.error);
     } else {
       console.log(res);
+      console.log(body);
     }
   });
 }
