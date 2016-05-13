@@ -47,13 +47,38 @@ var download = function(uri, filename, callback) {
   });
 }
 
-var processImageFromB64 = function(b64) {
+var processImageFromUrl = function(b64) {
   console.log("Supposed url" + b64);
   vision.detectText(b64, function(err, text) {
     if (err) {
       console.log(err);
     }
     console.log(text);
+  });
+}
+
+var processImageFromB64 = function(b64) {
+  request({
+    url: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDe32dvHgUx8RmSpzk1qA3d4N2_8paL1Ow',
+    method: 'POST',
+    json: {
+      requests: [{
+        features:[{
+          type: 'TEXT_DETECTION'
+        }],
+        image: {
+          content: b64
+        }
+      }]
+    }
+  }, function(err, res, body) {
+    if (error) {
+      console.log('Error processing image: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    } else {
+      console.log(res);
+    }
   });
 }
 
@@ -168,7 +193,7 @@ app.post('/webhook/', function (req, res) {
         b64img = img;
       });
 
-      processImageFromB64(imgUrl);
+      processImageFromB64(b64img);
       //download(imgUrl, filename, function() { //need file extension
       //  console.log("Downloaded.");
         //var bucket = gcs.bucket('receipt-read-bucket');
