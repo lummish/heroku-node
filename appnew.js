@@ -48,6 +48,7 @@ var download = function(uri, filename, callback) {
 }
 
 var processImageFromB64 = function(b64) {
+  console.log(b64);
   vision.detectText(b64, function(err, text) {
     console.log(text);
   });
@@ -150,8 +151,8 @@ app.post('/webhook/', function (req, res) {
     	//if (result.status_code == 200) {
     		//save file
         //may need to get file extension
-      var image_name = 'test-img.png';
-      var filename = image_name; //will need to update path
+      //var image_name = 'test-img.png';
+      //var filename = image_name; //will need to update path
     	//convertImgToDataURLviaFileReader(imgUrl);
       var options = {string: true};
       var b64img;
@@ -164,7 +165,7 @@ app.post('/webhook/', function (req, res) {
         b64img = img;
       });
 
-      processImageFromB64(b64img);
+      processImageFromB64(imgUrl);
       //download(imgUrl, filename, function() { //need file extension
       //  console.log("Downloaded.");
         //var bucket = gcs.bucket('receipt-read-bucket');
