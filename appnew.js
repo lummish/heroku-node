@@ -74,7 +74,7 @@ var convertImgToDataURLviaFileReader = function (url) {//, callback) {
     }
   */
     //reader.readAsDataURL(xhr.response);
-  };
+  //};
   xhr.open('GET', url);
   xhr.send();
 }
@@ -82,9 +82,6 @@ var convertImgToDataURLviaFileReader = function (url) {//, callback) {
 
 //post image data and process using cloudvision
 app.post('/upload', upload.single('displayImage'), function(req, res, next) {
-  
- 
-
   var bucket = gcs.bucket('test-bucket');
   var reader = new FileReader();
 	vision.detectText(reader.readAsDataURL(req.file.path), function(err, text, apiResponse) {
