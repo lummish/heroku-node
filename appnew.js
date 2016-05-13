@@ -53,7 +53,7 @@ var convertImgToDataURLviaFileReader = function(url) {//, callback) {
   xhr.responseType = 'arraybuffer';
   xhr.onload = function(e) {
     if (this.status == 200) {
-      var uInt8Array = newUint8Array(this.response);
+      var uInt8Array = new Uint8Array(this.response);
       var i = uInt8Array.length;
       var binaryString = new Array(i);
       while (i--) {
