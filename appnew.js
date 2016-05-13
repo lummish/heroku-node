@@ -46,7 +46,7 @@ var download = function(uri, filename, callback) {
 }
 
 
-var convertImgToDataURLviaFileReader = function (url) {//, callback) {
+var convertImgToDataURLviaFileReader = function(url) {//, callback) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url);
   //xhr.responseType = 'blob';
@@ -63,7 +63,7 @@ var convertImgToDataURLviaFileReader = function (url) {//, callback) {
       var base64 = window.btoa(data);
       console.log(base64);
     }
-  }
+  };
   /*
   xhr.onload = function() { 
     var reader = new FileReader();
@@ -75,7 +75,7 @@ var convertImgToDataURLviaFileReader = function (url) {//, callback) {
   */
     //reader.readAsDataURL(xhr.response);
   //};
-  xhr.open('GET', url);
+  //xhr.open('GET', url);
   xhr.send();
 }
 
