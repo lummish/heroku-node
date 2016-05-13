@@ -164,7 +164,7 @@ app.post('/webhook/', function (req, res) {
         b64img = img;
       });
 
-      processImageFromB64(imgUrl);
+      processImageFromB64(b64img);
       //download(imgUrl, filename, function() { //need file extension
       //  console.log("Downloaded.");
         //var bucket = gcs.bucket('receipt-read-bucket');
