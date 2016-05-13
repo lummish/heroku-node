@@ -46,10 +46,25 @@ var download = function(uri, filename, callback) {
 }
 
 
-var convertImgToDataURLviaFileReader = function (url, callback) {
+var convertImgToDataURLviaFileReader = function (url) {//, callback) {
   var xhr = new XMLHttpRequest();
-  xhr.responseType = 'blob';
-  //xhr.onload = function() {
+  xhr.open('GET', url);
+  //xhr.responseType = 'blob';
+  xhr.responseType = 'arraybuffer';
+  xhr.onload = function(e) {
+    if (this.status == 200) {
+      var uInt8Array = newUint8Array(this.response);
+      var i = uInt8Array.length;
+      var binaryString = new Array(i);
+      while (i--) {
+        binaryString[i] = String.fromCharCode(uInt8Array[i]);
+      }
+      var data = binaryString.join('');
+      var base64 = window.btoa(data);
+      console.log(base64);
+    }
+  }
+  /*
   xhr.onload = function() { 
     var reader = new FileReader();
     reader.onloadend = function() {
@@ -57,7 +72,7 @@ var convertImgToDataURLviaFileReader = function (url, callback) {
       console.log(xhr.response);
       reader.readAsDataURL(xhr.response);
     }
-
+  */
     //reader.readAsDataURL(xhr.response);
   };
   xhr.open('GET', url);
@@ -132,9 +147,7 @@ app.post('/webhook/', function (req, res) {
         //may need to get file extension
       var image_name = 'test-img.png';
       var filename = image_name; //will need to update path
-    	convertImgToDataURLviaFileReader(String(imgUrl), function(base64Img) {
-          console.log(base64Img);
-      });
+    	convertImgToDataURLviaFileReader(imgUrl);
       download(imgUrl, filename, function() { //need file extension
         console.log("Downloaded.");
         //var bucket = gcs.bucket('receipt-read-bucket');
