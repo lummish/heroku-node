@@ -7,6 +7,7 @@ var http = require('http'),
 	request = require('request'),
 	FileReader = require('filereader'),
   fs = require('fs'),
+  btoa = require('btoa'),
   XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
 	gcloud = require('gcloud')({
 		keyFilename: 'Receipt Read Test-674e7b00346d.json',
@@ -60,7 +61,7 @@ var convertImgToDataURLviaFileReader = function(url) {//, callback) {
         binaryString[i] = String.fromCharCode(uInt8Array[i]);
       }
       var data = binaryString.join('');
-      var base64 = window.btoa(data);
+      var base64 = btoa(data);
       console.log(base64);
     }
   };
