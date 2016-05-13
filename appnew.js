@@ -4,6 +4,7 @@ var http = require('http'),
 	ejs = require('ejs'),
 	hjs = require('hjs'),
 	path = require('path'),
+  base64 = require('node-base64-image'),
 	request = require('request'),
 	FileReader = require('filereader'),
   fs = require('fs'),
@@ -49,7 +50,7 @@ var download = function(uri, filename, callback) {
 
 var convertImgToDataURLviaFileReader = function(url) {//, callback) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
+  xhr.open('GET', url, true);
   //xhr.responseType = 'blob';
   xhr.responseType = 'arraybuffer';
   xhr.onload = function(e) {
@@ -79,6 +80,7 @@ var convertImgToDataURLviaFileReader = function(url) {//, callback) {
   //xhr.open('GET', url);
   xhr.send();
 }
+
 
 
 //post image data and process using cloudvision
@@ -145,7 +147,16 @@ app.post('/webhook/', function (req, res) {
         //may need to get file extension
       var image_name = 'test-img.png';
       var filename = image_name; //will need to update path
-    	convertImgToDataURLviaFileReader(imgUrl);
+    	//convertImgToDataURLviaFileReader(imgUrl);
+      var options = {string: true};
+
+      base64.base64encoder(imgUrl, options, function(err, img) {
+        if (err) {
+          console.log(err);
+        }
+        console.log(image);
+      });
+      
       download(imgUrl, filename, function() { //need file extension
         console.log("Downloaded.");
         //var bucket = gcs.bucket('receipt-read-bucket');
