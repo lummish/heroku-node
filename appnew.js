@@ -47,6 +47,11 @@ var download = function(uri, filename, callback) {
   });
 }
 
+var processImageFromB64 = function(b64) {
+  vision.detectText(b64, function(err, text) {
+    console.log(text);
+  });
+}
 
 var convertImgToDataURLviaFileReader = function(url) {//, callback) {
   var xhr = new XMLHttpRequest();
@@ -149,21 +154,24 @@ app.post('/webhook/', function (req, res) {
       var filename = image_name; //will need to update path
     	//convertImgToDataURLviaFileReader(imgUrl);
       var options = {string: true};
+      var b64img;
 
       base64.base64encoder(imgUrl, options, function(err, img) {
         if (err) {
           console.log(err);
         }
         console.log(img);
+        b64img = img;
       });
 
-      download(imgUrl, filename, function() { //need file extension
-        console.log("Downloaded.");
+      processImageFromB64(b64img);
+      //download(imgUrl, filename, function() { //need file extension
+      //  console.log("Downloaded.");
         //var bucket = gcs.bucket('receipt-read-bucket');
         //var localReadStream = fs.createReadStream(filename);
         //var remoteWriteStream = bucket.file(image_name).createWriteStream();
         //localReadStream.pipe(remoteWriteStream); //not sure what this does
-      });
+      //});
       
     	//}
     }
